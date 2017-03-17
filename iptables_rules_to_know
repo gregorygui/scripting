@@ -1,0 +1,4 @@
+iptables -t nat -L --line-numbers
+iptables -t nat -D PREROUTING 1
+iptables -t nat -A POSTROUTING -i xenbr0 -j SNAT --to 151.80.44.39
+iptables -t nat -A PREROUTING -i xenbr0 -p tcp -m tcp --dport 80 -j DNAT --to-destination 169.254.0.32:80 

@@ -1,0 +1,14 @@
+How to fake available storage for an external drive ?
+	==> Change the fat32 header
+
+Create a files system of the desired size :
+	mkdosfs -C FakeStorage 1000000000
+	(Tips 'ls -lh' reads the header whereas 'ls -sh' read each data block)
+
+Unmount your device et rewrite its header :
+	umout /dev/sdc1
+	ls -s FakeStorage ==> keep this information for the next command
+	head -c 244136 FakeStorage > /dev/sdc1
+
+Change the name of the device :
+	mlabel -i /dev/sdc1 ::"NewName"
