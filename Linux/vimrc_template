@@ -1,0 +1,8 @@
+set background=dark
+syntax on
+set number
+set autoindent
+set smartindent
+set showmode
+set ruler
+set showcmd
