@@ -1,0 +1,5 @@
+jwt
+requests
+pycryptodome
+pwn
+urllib3

