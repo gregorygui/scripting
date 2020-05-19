@@ -5,17 +5,27 @@ import string
 def complete(f, l):
 	res = list()
 	res.append(f+"."+l+"\n")
+	res.append(f.capitalize()+"."+l.capitalize()+"\n")
 	res.append(f+".a."+l+"\n")
+	res.append(f.capitalize()+".a."+l.capitalize()+"\n")
 	return res
 
 def inif(f, l):
 	res = list()
 	res.append(f[0]+l+"\n")
 	res.append(f[0]+"a"+l+"\n")
+	res.append(f.capitalize()[0]+l+"\n")
+	res.append(f.capitalize()[0]+"a"+l+"\n")
+	res.append(f.capitalize()[0]+l.capitalize()+"\n")
+	res.append(f.capitalize()[0]+"a"+l.capitalize()+"\n")
 	return res
 
 def three(f, l):
 	res = list()
+	res.append(f[0:3]+l[0:3]+"\n")
+	res.append(f[0:3]+"a"+l[0:3]+"\n")
+	f = f.capitalize()
+	l = l.capitalize()
 	res.append(f[0:3]+l[0:3]+"\n")
 	res.append(f[0:3]+"a"+l[0:3]+"\n")
 	return res
@@ -25,10 +35,15 @@ def rand(f):
 	rand = ["".join(x) for x in combinations_with_replacement(string.digits, 3)]
 	for r in rand:
 		res.append(f[0:3]+r+"\n")
+		f = f.capitalize()
+		res.append(f[0:3]+r+"\n")
 	return res
 
 def inverse(f, l):
 	res = list()
+	res.append(l+f[0]+"\n")
+	res.append(l+f[0:2]+"\n")
+	l = l.capitalize()
 	res.append(l+f[0]+"\n")
 	res.append(l+f[0:2]+"\n")
 	return res
