@@ -13,8 +13,8 @@ site_address = ".cryptohack.org"
 
 def getRemoteHttpData(u):
     remote = PoolManager()
-    r = remote.request("GET",u)
-    return json.loads(r.data)    
+    r = remote.request("GET", u)
+    return json.loads(r.data)
 
 
 def getWords():
@@ -58,9 +58,9 @@ def generateFactorList(n):
     if n == 1:
         return [1]
     i = 2
-    limit = n**0.5
-    while i <= limit:
+    while i**2 <= n:
         if n % i == 0:
+            print(i)
             res = generateFactorList(n//i)
             if i not in res:
                 res.append(i)
@@ -262,7 +262,8 @@ def monoprime():
 
 
 def passwordAsKeys():
-    data = getRemoteHttpData("aes" + site_address + "/passwords_as_keys/encrypt_flag/")
+    data = getRemoteHttpData("aes" +
+                             site_address + "/passwords_as_keys/encrypt_flag/")
     ct = bytes.fromhex(data['ciphertext'])
     for w in getWords():
         hw = MD5.new()
@@ -296,7 +297,11 @@ def ecbOracle():
 
 
 def main():
-    ecbOracle()
+    # ecbOracle()
+    e = 1
+    c = 9327565722767258308650643213344542404592011161659991421
+    n = 245841236512478852752909734912575581815967630033049838269083
+    print(generateFactorList(n))
 
 
 if __name__ == "__main__":

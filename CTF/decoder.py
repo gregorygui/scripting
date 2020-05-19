@@ -137,9 +137,9 @@ def main():
         res = lendian(res)
     if isinstance(res, dict):
         for k, v in res.items():
-            print("+ (key = " + str(k) + ") " + str(args.val) + " ==> " + str(v))
+            print("+ (key = " + str(k) + ") " + str(args.val) + " ==> " + str(v.encode()))
     else:
-        print("+ (key = " + str(args.key) + ") " + str(args.val) + " ==> " + str(res))
+        print("+ (key = " + str(args.key) + ") " + str(args.val) + " ==> " + str(res.encode()))
 
 
 if __name__ == "__main__":
